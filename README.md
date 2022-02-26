@@ -12,3 +12,8 @@ Given the prevalence of delays and the added cost that would be required for the
 API utilized was https://rapidapi.com/aedbx-aedbx/api/aerodatabox/
 
 In order to set up requires account and add api key to api_request.py line 16
+
+# Setting up local database
+
+create SQLite3 databse and run createLocalDB.sql to populate tables
+
