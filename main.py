@@ -27,10 +27,7 @@ if __name__ == '__main__':
             var_exists = False
         else:
             var_exists = True
-        if var_exists:
-            hoursToMin = hoursToMin
-        else:
-            hoursToMin = 0
+        hoursToMin = hoursToMin if var_exists else 0
         calcDelay = hoursToMin + int(delay.split(":")[1])
     else:
         calcDelay = 0
@@ -42,11 +39,7 @@ if __name__ == '__main__':
     else:
         var_exists = True
 
-    if var_exists:
-        calcDelay = calcDelay
-    else:
-        calcDelay = 0
-
+    calcDelay = calcDelay if var_exists else 0
     write_customer(transaction_num, information.customerFirstName, information.customerLastName,
                    get_wallet_amount(), information.flightNumber,
                    calcDelay,

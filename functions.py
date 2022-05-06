@@ -19,12 +19,9 @@ def generate_transaction_number():
     db = Database()
     query = '''SELECT transaction_ID from transactions;'''
     query_result = db.cur.execute(query)
-    transaction_ids = []
-    for row in query_result:
-        transaction_ids.append(row[0])
+    transaction_ids = [row[0] for row in query_result]
     m = 100000000
-    transaction_num = random.choice([x for x in range(m) if x not in transaction_ids])
-    return transaction_num
+    return random.choice([x for x in range(m) if x not in transaction_ids])
 
 
 def generate_customer_ID():
@@ -33,12 +30,9 @@ def generate_customer_ID():
     query_result = db.cur.execute(query)
     # db.connection.commit()
     # db.connection.row_factory = sqlite3.Row
-    customer_id = []
-    for row in query_result:
-        customer_id.append(row[0])
+    customer_id = [row[0] for row in query_result]
     m = 100000000
-    customer_num = random.choice([x for x in range(m) if x not in customer_id])
-    return customer_num
+    return random.choice([x for x in range(m) if x not in customer_id])
 
 
 def write_customer(transaction_id, first, last, wallet_total, wallet_change, flight_number, flight_delay,
@@ -65,24 +59,17 @@ def get_wallet_amount():
     db = Database()
     query = '''SELECT dollar_amount from wallet where customer_id = (SELECT MAX(customer_id) FROM wallet);'''
     query_result = db.cur.execute(query)
-    transaction_ids = []
-    for row in query_result:
-        transaction_ids.append(row[0])
-    wallet_amount = transaction_ids[0]
-    return wallet_amount
+    transaction_ids = [row[0] for row in query_result]
+    return transaction_ids[0]
 
 
 def calculate_payout(delay_time):
     payout = 75
-    if delay_time <= 30:
-        return 0
-    else:
-        return payout
+    return 0 if delay_time <= 30 else payout
 
 
 def get_wallet_change(payout):
-    new_value = get_wallet_amount() - payout
-    return new_value
+    return get_wallet_amount() - payout
 
 
 def update_insurance_wallet(dollar_amount, transactionID):
